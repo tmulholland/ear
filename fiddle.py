@@ -1,4 +1,5 @@
 import time
+import glob
 from itertools impor chain
 
 import numpy as np
@@ -12,13 +13,21 @@ class Phrase:
         self.files = self.get_phrase_files()
 
     def get_phrase_files(self):
-        pass
+        all_files = glob.glob('~/ear/audio/*')
+        files = []
+        for note in self.phrase:
+            for file in all_files:
+                if file.endswith(note+'.wav'):
+                    files.append(file)
+        return files
 
     def __repr__(self):
-        pass
+        print(self.description)
 
     def __sort__(self):
-        pass
+        indices = sorted(range(len(self.phrase)), key=lambda x: int(self.phrase[x][-1])*1000 + ord(self.phrase[x][0])%99 + 0.5*('sharp' in self.phrase[x]))
+        self.phrase = list(np.array(self.phrase)[indices])
+        self.files  = list(np.array(self.files )[indices])
 
 class FiddleScale:
 
