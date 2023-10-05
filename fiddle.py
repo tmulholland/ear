@@ -25,7 +25,9 @@ class Phrase:
         print(self.description)
 
     def __sort__(self):
-        indices = sorted(range(len(self.phrase)), key=lambda x: int(self.phrase[x][-1])*1000 + ord(self.phrase[x][0])%99 + 0.5*('sharp' in self.phrase[x]))
+        indices = sorted(range(len(self.phrase)), key=lambda x: int(self.phrase[x][-1])*1000
+                                                              + ord(self.phrase[x][0])%99
+                                                              + 0.5*('sharp' in self.phrase[x]))
         self.phrase = list(np.array(self.phrase)[indices])
         self.files  = list(np.array(self.files )[indices])
 
